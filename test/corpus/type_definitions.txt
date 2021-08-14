@@ -1,0 +1,49 @@
+===
+Type definitions
+===
+
+module Foo
+
+type Z { }
+
+type A { A }
+
+type B { B1, B2 }
+
+type C {
+  C1 A,
+  C2 B,
+  C3 (A -> B),
+}
+
+type D {
+  D1 [a: B],
+  D2 ([a: B] -> [:]),
+  D3
+}
+
+---
+
+(module (module_ident)
+  (type_def (ctor_ident))
+  (type_def
+    (ctor_ident)
+    (ctor_def (ctor_ident)))
+  (type_def
+    (ctor_ident)
+    (ctor_def (ctor_ident))
+    (ctor_def (ctor_ident)))
+  (type_def
+    (ctor_ident)
+    (ctor_def (ctor_ident) (ctor_type (ctor_ident)))
+    (ctor_def (ctor_ident) (ctor_type (ctor_ident)))
+    (ctor_def (ctor_ident) (func_type (ctor_type (ctor_ident)) (ctor_type (ctor_ident)))))
+  (type_def
+    (ctor_ident)
+    (ctor_def (ctor_ident) (record_type (record_type_pair (ident) (ctor_type (ctor_ident)))))
+    (ctor_def (ctor_ident)
+      (func_type
+        (record_type (record_type_pair (ident) (ctor_type (ctor_ident))))
+        (record_type)))
+    (ctor_def (ctor_ident)))
+)

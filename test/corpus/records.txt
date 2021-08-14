@@ -1,0 +1,55 @@
+===
+Records
+===
+
+module Foo
+
+foo : A {
+  [
+    [:],
+    [a: 1],
+    [a: 1,],
+    [a: 1, b: 2],
+    [a: 1, b: 2, c: 3,],
+    [a: 1, b: f x, c: F x, d: match { F x -> x }],
+    [a: 1, a: 2],
+    [a: 1, b: [c: 3]],
+  ]
+}
+
+---
+
+(module
+  (module_ident)
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (list
+      (record)
+      (record (record_pair (ident) (int)))
+      (record (record_pair (ident) (int)))
+      (record
+        (record_pair (ident) (int))
+        (record_pair (ident) (int)))
+      (record
+        (record_pair (ident) (int))
+        (record_pair (ident) (int))
+        (record_pair (ident) (int)))
+      (record
+        (record_pair (ident) (int))
+        (record_pair (ident) (app (var (ident)) (var (ident))))
+        (record_pair (ident) (app (ctor (ctor_ident)) (var (ident))))
+        (record_pair (ident)
+          (match
+            (match_branch
+              (pattern_group (ctor_pattern (ctor (ctor_ident)) (var_pattern (ident))))
+              (var (ident))))))
+      (record
+        (record_pair (ident) (int))
+        (record_pair (ident) (int)))
+      (record
+        (record_pair (ident) (int))
+        (record_pair
+          (ident)
+          (record (record_pair (ident) (int)))))
+    )))

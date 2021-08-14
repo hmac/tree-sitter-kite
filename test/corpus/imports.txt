@@ -1,0 +1,56 @@
+===
+Imports
+===
+
+module Foo
+
+import Bar1
+import open Bar2
+import Bar3 {
+  a,
+  b,
+  A,
+  B,
+  C { C1, C2 },
+  D { * }
+}
+import Bar4 as BarFour
+from baz import Baz
+from baz import Baz {
+  E,
+  F { F1, F2, },
+  e, f
+}
+
+---
+
+(module (module_ident)
+  (import (module_ident))
+  (import (import_open) (module_ident))
+  (import (module_ident)
+    (import_list
+      (import_val (ident))
+      (import_val (ident))
+      (import_type (ctor_ident))
+      (import_type (ctor_ident))
+      (import_type (ctor_ident) (ctor_ident) (ctor_ident))
+      (import_type (ctor_ident) (import_type_all))
+    )
+  )
+  (import (module_ident) (import_alias (module_ident)))
+  (import_from (pkg_ident) (module_ident))
+  (import_from (pkg_ident) (module_ident)
+    (import_list
+      (import_type (ctor_ident))
+      (import_type (ctor_ident) (ctor_ident) (ctor_ident))
+      (import_val (ident))
+      (import_val (ident))
+    )
+  )
+)
+
+===
+Todo
+===
+
+

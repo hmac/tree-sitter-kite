@@ -1,0 +1,65 @@
+===
+Lists
+===
+
+module Foo
+
+foo1 : A {
+  []
+}
+
+foo2 : A {
+  [1]
+}
+
+foo3 : A {
+  [1,]
+}
+
+foo4 : A {
+  [1, 2]
+}
+
+foo5 : A {
+  [1, 2, 3,]
+}
+
+foo5 : A {
+  [1, f x, F x, match { F x -> x }, [2]]
+}
+
+---
+
+(module (module_ident)
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (list))
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (list (int)))
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (list (int)))
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (list (int) (int)))
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (list (int) (int) (int)))
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (list
+      (int)
+      (app (var (ident)) (var (ident)))
+      (app (ctor (ctor_ident)) (var (ident)))
+      (match
+        (match_branch
+          (pattern_group (ctor_pattern (ctor (ctor_ident)) (var_pattern (ident))))
+          (var (ident))))
+      (list (int)))))

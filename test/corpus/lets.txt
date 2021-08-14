@@ -1,0 +1,43 @@
+===
+Let expressions
+===
+
+module Foo
+
+foo : A {
+  [
+    let x = 1 { x },
+    let x = 1,
+      { x },
+    let x = 1,
+        y = 2 { x },
+    let x = 1,
+        y = 2, { x },
+    let x = 1,
+        y = 2, { let z = x { z } },
+  ]
+}
+
+---
+
+(module (module_ident)
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (list
+      (let (let_pair (ident) (int)) (var (ident)))
+      (let (let_pair (ident) (int)) (var (ident)))
+      (let
+        (let_pair (ident) (int))
+        (let_pair (ident) (int))
+        (var (ident)))
+      (let
+        (let_pair (ident) (int))
+        (let_pair (ident) (int))
+        (var (ident)))
+      (let
+        (let_pair (ident) (int))
+        (let_pair (ident) (int))
+        (let
+          (let_pair (ident) (var (ident)))
+          (var (ident)))))))

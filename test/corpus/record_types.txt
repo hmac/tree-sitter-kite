@@ -1,0 +1,35 @@
+===
+Record types
+===
+
+module Foo
+
+foo1 : [a : A] { [] }
+
+foo2 : [a : A,] { [] }
+
+foo2 : [a : A, b : [B]] { [] }
+
+foo3 : [:] { [:] }
+
+---
+
+(module (module_ident)
+  (val_def 
+    (ident)
+    (record_type (record_type_pair (ident) (ctor_type (ctor_ident))))
+    (list))
+  (val_def 
+    (ident)
+    (record_type (record_type_pair (ident) (ctor_type (ctor_ident))))
+    (list))
+  (val_def 
+    (ident)
+    (record_type
+      (record_type_pair (ident) (ctor_type (ctor_ident)))
+      (record_type_pair (ident) (list_type (ctor_type (ctor_ident)))))
+    (list))
+  (val_def 
+    (ident)
+    (record_type)
+    (record)))
