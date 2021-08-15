@@ -1,11 +1,23 @@
 const parens = (...rule) => seq('(', ...rule, ')');
 const brackets = (...rule) => seq('[', ...rule, ']');
 
+// sep_by("," $.ident) parses:
+//    <nothing>
+//    a
+//    a,
+//    a, b
+//    a, b,
+const sep_by = (separator, ...rule) => optional(sep_by1(separator, ...rule));
 // sep_by1("," $.ident) parses:
 //    a
 //    a, b
 //    a, b,
 const sep_by1 = (separator, ...rule) => seq(...rule, repeat(seq(separator, ...rule)), optional(separator));
+// sep_by2("," $.ident) parses:
+//    a, b
+//    a, b,
+//    a, b, c
+const sep_by2 = (separator, ...rule) => seq(...rule, separator, ...rule, repeat(seq(separator, ...rule)), optional(separator));
 
 const comma_sep = (...rule) => sep_by1(",", ...rule);
 
@@ -72,13 +84,19 @@ module.exports = grammar({
     _expr: $ => choice($._aexpr, $.app),
 
     // All expressions, excluding applications, which must be parenthesised
-    _aexpr: $ => choice($.match, $.ctor, $.let, $.var, $.list, $.record, $.int, parens($._expr)),
+    _aexpr: $ => choice($.match, $.ctor, $.let, $.var, $.list, $.record, $.tuple, $.int, parens($._expr)),
 
     app: $ => prec.left(1, seq($._aexpr, repeat1($._aexpr))),
     ctor: $ => $.ctor_ident,
     var: $ => $.ident,
     list: $ => seq("[", optional(comma_sep($._expr)), "]"),
     int: $ => /[0-9]+/,
+
+    // Tuples
+    // (,)
+    // (,1)
+    // (,1,2)
+    tuple: $ => parens(seq(",", sep_by(",", $._expr))),
 
     // Records
     record: $ => seq("[", choice(":", comma_sep($.record_pair)), "]"),

@@ -1,0 +1,34 @@
+===
+Tuples
+===
+
+module Foo
+
+foo : A {
+  (, (,)
+   , (, 1,)
+   , (, 1, 2)
+   , (, 1, 2, foo, f x, Bar, match { x -> x})
+   , (some expr)
+  )
+}
+
+---
+
+(module
+  (module_ident)
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (tuple
+      (tuple)
+      (tuple (int))
+      (tuple (int) (int))
+      (tuple
+        (int)
+        (int)
+        (var (ident))
+        (app (var (ident)) (var (ident)))
+        (ctor (ctor_ident))
+        (match (match_branch (pattern_group (var_pattern (ident))) (var (ident)))))
+      (app (var (ident)) (var (ident))))))

@@ -36,6 +36,10 @@
           "named": true
         },
         {
+          "type": "tuple",
+          "named": true
+        },
+        {
           "type": "var",
           "named": true
         }
@@ -424,6 +428,10 @@
           "named": true
         },
         {
+          "type": "tuple",
+          "named": true
+        },
+        {
           "type": "var",
           "named": true
         }
@@ -471,6 +479,10 @@
           "named": true
         },
         {
+          "type": "tuple",
+          "named": true
+        },
+        {
           "type": "var",
           "named": true
         }
@@ -511,6 +523,10 @@
         },
         {
           "type": "record",
+          "named": true
+        },
+        {
+          "type": "tuple",
           "named": true
         },
         {
@@ -639,6 +655,10 @@
         },
         {
           "type": "record",
+          "named": true
+        },
+        {
+          "type": "tuple",
           "named": true
         },
         {
@@ -771,6 +791,10 @@
           "named": true
         },
         {
+          "type": "tuple",
+          "named": true
+        },
+        {
           "type": "var",
           "named": true
         }
@@ -826,6 +850,53 @@
         },
         {
           "type": "var_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tuple",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "app",
+          "named": true
+        },
+        {
+          "type": "ctor",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "match",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "var",
           "named": true
         }
       ]
@@ -908,6 +979,10 @@
         },
         {
           "type": "record_type",
+          "named": true
+        },
+        {
+          "type": "tuple",
           "named": true
         },
         {
