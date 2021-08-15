@@ -16,6 +16,10 @@
           "named": true
         },
         {
+          "type": "div",
+          "named": true
+        },
+        {
           "type": "int",
           "named": true
         },
@@ -29,6 +33,18 @@
         },
         {
           "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
           "named": true
         },
         {
@@ -222,6 +238,69 @@
     }
   },
   {
+    "type": "div",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "app",
+          "named": true
+        },
+        {
+          "type": "ctor",
+          "named": true
+        },
+        {
+          "type": "div",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "var",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "func_type",
     "named": true,
     "fields": {},
@@ -373,6 +452,11 @@
     }
   },
   {
+    "type": "import_type_all",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "import_val",
     "named": true,
     "fields": {},
@@ -404,6 +488,10 @@
           "named": true
         },
         {
+          "type": "div",
+          "named": true
+        },
+        {
           "type": "int",
           "named": true
         },
@@ -421,6 +509,18 @@
         },
         {
           "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
           "named": true
         },
         {
@@ -455,6 +555,10 @@
           "named": true
         },
         {
+          "type": "div",
+          "named": true
+        },
+        {
           "type": "ident",
           "named": true
         },
@@ -472,6 +576,18 @@
         },
         {
           "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
           "named": true
         },
         {
@@ -506,6 +622,10 @@
           "named": true
         },
         {
+          "type": "div",
+          "named": true
+        },
+        {
           "type": "int",
           "named": true
         },
@@ -519,6 +639,18 @@
         },
         {
           "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
           "named": true
         },
         {
@@ -634,6 +766,10 @@
           "named": true
         },
         {
+          "type": "div",
+          "named": true
+        },
+        {
           "type": "int",
           "named": true
         },
@@ -650,7 +786,82 @@
           "named": true
         },
         {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
           "type": "pattern_group",
+          "named": true
+        },
+        {
+          "type": "plus",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "var",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "minus",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "app",
+          "named": true
+        },
+        {
+          "type": "ctor",
+          "named": true
+        },
+        {
+          "type": "div",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
           "named": true
         },
         {
@@ -705,6 +916,69 @@
     "fields": {}
   },
   {
+    "type": "mul",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "app",
+          "named": true
+        },
+        {
+          "type": "ctor",
+          "named": true
+        },
+        {
+          "type": "div",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "var",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pattern_group",
     "named": true,
     "fields": {},
@@ -730,6 +1004,69 @@
         },
         {
           "type": "wildcard_pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "plus",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "app",
+          "named": true
+        },
+        {
+          "type": "ctor",
+          "named": true
+        },
+        {
+          "type": "div",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "var",
           "named": true
         }
       ]
@@ -767,6 +1104,10 @@
           "named": true
         },
         {
+          "type": "div",
+          "named": true
+        },
+        {
           "type": "ident",
           "named": true
         },
@@ -784,6 +1125,18 @@
         },
         {
           "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
           "named": true
         },
         {
@@ -872,6 +1225,10 @@
           "named": true
         },
         {
+          "type": "div",
+          "named": true
+        },
+        {
           "type": "int",
           "named": true
         },
@@ -885,6 +1242,18 @@
         },
         {
           "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
           "named": true
         },
         {
@@ -946,6 +1315,10 @@
           "named": true
         },
         {
+          "type": "div",
+          "named": true
+        },
+        {
           "type": "func_type",
           "named": true
         },
@@ -971,6 +1344,18 @@
         },
         {
           "type": "match",
+          "named": true
+        },
+        {
+          "type": "minus",
+          "named": true
+        },
+        {
+          "type": "mul",
+          "named": true
+        },
+        {
+          "type": "plus",
           "named": true
         },
         {
@@ -1050,11 +1435,27 @@
     "named": false
   },
   {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
     "type": ",",
     "named": false
   },
   {
+    "type": "-",
+    "named": false
+  },
+  {
     "type": "->",
+    "named": false
+  },
+  {
+    "type": "/",
     "named": false
   },
   {
@@ -1091,10 +1492,6 @@
   },
   {
     "type": "import_open",
-    "named": true
-  },
-  {
-    "type": "import_type_all",
     "named": true
   },
   {

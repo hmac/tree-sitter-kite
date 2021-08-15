@@ -81,7 +81,7 @@ module.exports = grammar({
     var_type: $ => $.ident,
 
     // All expressions
-    _expr: $ => choice($._aexpr, $.app),
+    _expr: $ => choice($._aexpr, $._infix, $.app),
 
     // All expressions, excluding applications, which must be parenthesised
     _aexpr: $ => choice($.match, $.ctor, $.let, $.var, $.list, $.record, $.tuple, $.int, parens($._expr)),
@@ -91,6 +91,14 @@ module.exports = grammar({
     var: $ => $.ident,
     list: $ => seq("[", optional(comma_sep($._expr)), "]"),
     int: $ => /[0-9]+/,
+
+    // Infix application
+    // + - * /
+    _infix: $ => choice($.plus, $.minus, $.mul, $.div),
+    plus: $ => prec.left(1, seq($._expr, "+", $._expr)),
+    minus: $ => prec.left(1, seq($._expr, "-", $._expr)),
+    mul: $ => prec.left(3, seq($._expr, "*", $._expr)),
+    div: $ => prec.left(3, seq($._expr, "/", $._expr)),
 
     // Tuples
     // (,)

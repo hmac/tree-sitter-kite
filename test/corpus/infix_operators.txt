@@ -1,0 +1,26 @@
+===
+Infix Operators
+===
+
+module Foo
+
+foo : A {
+  [
+    3 + 0,
+    1 + 1 + 1,
+    5 * 2 - 1 / 5,
+    5 - 4 + 3 - 2 + 1,
+  ]
+}
+
+---
+
+(module (module_ident)
+  (val_def (ident)
+    (ctor_type (ctor_ident))
+    (list
+      (plus (int) (int))
+      (plus (plus (int) (int)) (int))
+      (minus (mul (int) (int)) (div (int) (int)))
+      (plus (minus (plus (minus (int) (int)) (int)) (int)) (int))
+    )))
