@@ -10,6 +10,8 @@ foo : A {
     1 + 1 + 1,
     5 * 2 - 1 / 5,
     5 - 4 + 3 - 2 + 1,
+    1 :: 2 :: [],
+    f x :: g y,
   ]
 }
 
@@ -23,4 +25,9 @@ foo : A {
       (plus (plus (int) (int)) (int))
       (minus (mul (int) (int)) (div (int) (int)))
       (plus (minus (plus (minus (int) (int)) (int)) (int)) (int))
+      (cons (int) (cons (int) (list)))
+      (cons
+        (app (var (ident)) (var (ident)))
+        (app (var (ident)) (var (ident))))
+
     )))

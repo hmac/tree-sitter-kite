@@ -53,3 +53,34 @@ foo : A {
           (ident)
           (record (record_pair (ident) (int)))))
     )))
+
+===
+Record projection
+===
+
+module Foo
+
+foo : A {
+  [
+    a.b,
+    a.b.c,
+    match { x -> x }.a
+  ]
+}
+
+(module
+  (module_ident)
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (list
+      (record_projection (var (ident)) (ident))
+      (record_projection
+        (record_projection (var (ident)) (ident))
+        (ident))
+      (record_projection
+        (match
+          (match_branch
+            (pattern_group (var_pattern (ident)))
+            (var (ident))))
+        (ident)))))

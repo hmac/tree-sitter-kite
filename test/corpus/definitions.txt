@@ -1,22 +1,4 @@
 ==========
-Applications
-==========
-
-module Foo
-
-foo : A {
-  a b c
-}
-
----
-
-(module (module_ident)
-  (val_def 
-    (ident)
-    (ctor_type (ctor_ident))
-    (app (var (ident)) (var (ident)) (var (ident)))))
-
-==========
 nth
 ==========
 

@@ -30,11 +30,15 @@
     },
     "_lower_ident": {
       "type": "PATTERN",
-      "value": "[a-z][A-Za-z0-9_]*"
+      "value": "[a-z_][A-Za-z0-9_]*"
     },
     "_upper_ident": {
       "type": "PATTERN",
       "value": "[A-Z][A-Za-z0-9_]*"
+    },
+    "_qual_upper_ident": {
+      "type": "PATTERN",
+      "value": "[A-Z][A-Za-z0-9_]*(\\.[A-Z][A-Za-z0-9_]*)*"
     },
     "ident": {
       "type": "SYMBOL",
@@ -46,7 +50,7 @@
     },
     "module_ident": {
       "type": "SYMBOL",
-      "name": "_upper_ident"
+      "name": "_qual_upper_ident"
     },
     "pkg_ident": {
       "type": "PATTERN",
@@ -358,6 +362,18 @@
           "name": "ctor_ident"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "type_params"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SEQ",
           "members": [
             {
@@ -432,6 +448,13 @@
           }
         }
       ]
+    },
+    "type_params": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "ident"
+      }
     },
     "_type": {
       "type": "CHOICE",
@@ -680,6 +703,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "record_projection"
+        },
+        {
+          "type": "SYMBOL",
           "name": "tuple"
         },
         {
@@ -813,12 +840,16 @@
         {
           "type": "SYMBOL",
           "name": "div"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "cons"
         }
       ]
     },
     "plus": {
       "type": "PREC_LEFT",
-      "value": 1,
+      "value": 2,
       "content": {
         "type": "SEQ",
         "members": [
@@ -839,7 +870,7 @@
     },
     "minus": {
       "type": "PREC_LEFT",
-      "value": 1,
+      "value": 2,
       "content": {
         "type": "SEQ",
         "members": [
@@ -892,6 +923,27 @@
           {
             "type": "STRING",
             "value": "/"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expr"
+          }
+        ]
+      }
+    },
+    "cons": {
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_expr"
+          },
+          {
+            "type": "STRING",
+            "value": "::"
           },
           {
             "type": "SYMBOL",
@@ -1042,6 +1094,26 @@
           "name": "_expr"
         }
       ]
+    },
+    "record_projection": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_aexpr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_record_projection"
+        }
+      ]
+    },
+    "_record_projection": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\.[_a-z0-9][A-Za-z0-9_]*"
+      }
     },
     "let": {
       "type": "SEQ",

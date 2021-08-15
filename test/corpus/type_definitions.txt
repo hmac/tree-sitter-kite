@@ -22,6 +22,11 @@ type D {
   D3
 }
 
+type E a {
+  E0,
+  E1 a
+}
+
 ---
 
 (module (module_ident)
@@ -46,4 +51,10 @@ type D {
         (record_type (record_type_pair (ident) (ctor_type (ctor_ident))))
         (record_type)))
     (ctor_def (ctor_ident)))
+
+  (type_def
+    (ctor_ident)
+    (type_params (ident))
+    (ctor_def (ctor_ident))
+    (ctor_def (ctor_ident) (var_type (ident))))
 )

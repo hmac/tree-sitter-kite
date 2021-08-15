@@ -32,14 +32,17 @@ module.exports = grammar({
     // All names must start with a letter and contain only alphanumerics and '_'.
 
     // A name that starts with a lowercase letter
-    _lower_ident: $ => /[a-z][A-Za-z0-9_]*/,
+    _lower_ident: $ => /[a-z_][A-Za-z0-9_]*/,
 
     // A name that starts with an uppercase letter
     _upper_ident: $ => /[A-Z][A-Za-z0-9_]*/,
 
+    // A series of upper idents separated by dots
+    _qual_upper_ident: $ => /[A-Z][A-Za-z0-9_]*(\.[A-Z][A-Za-z0-9_]*)*/,
+
     ident: $ => $._lower_ident,
     ctor_ident: $ => $._upper_ident,
-    module_ident: $ => $._upper_ident,
+    module_ident: $ => $._qual_upper_ident,
 
     // Package names are more restrictive. They can only contain lowercase letters, numbers and '-'.
     // They must start with a letter.
@@ -61,8 +64,9 @@ module.exports = grammar({
 
     _def: $ => choice($.val_def, $.type_def),
     val_def: $ => seq($.ident, ":", $._type, block($._expr)),
-    type_def: $ => seq("type", $.ctor_ident, block(optional(comma_sep($.ctor_def)))),
+    type_def: $ => seq("type", $.ctor_ident, optional($.type_params), block(optional(comma_sep($.ctor_def)))),
     ctor_def: $ => seq($.ctor_ident, repeat($._atype)),
+    type_params: $ => repeat1($.ident),
 
     // All types
     _type: $ => choice($._atype, $.func_type, $.app_type),
@@ -84,7 +88,17 @@ module.exports = grammar({
     _expr: $ => choice($._aexpr, $._infix, $.app),
 
     // All expressions, excluding applications, which must be parenthesised
-    _aexpr: $ => choice($.match, $.ctor, $.let, $.var, $.list, $.record, $.tuple, $.int, parens($._expr)),
+    _aexpr: $ => choice(
+      $.match,
+      $.ctor,
+      $.let,
+      $.var,
+      $.list,
+      $.record,
+      $.record_projection,
+      $.tuple,
+      $.int,
+      parens($._expr)),
 
     app: $ => prec.left(1, seq($._aexpr, repeat1($._aexpr))),
     ctor: $ => $.ctor_ident,
@@ -92,13 +106,14 @@ module.exports = grammar({
     list: $ => seq("[", optional(comma_sep($._expr)), "]"),
     int: $ => /[0-9]+/,
 
-    // Infix application
-    // + - * /
-    _infix: $ => choice($.plus, $.minus, $.mul, $.div),
-    plus: $ => prec.left(1, seq($._expr, "+", $._expr)),
-    minus: $ => prec.left(1, seq($._expr, "-", $._expr)),
+    // Infix operators
+    // + - * / ::
+    _infix: $ => choice($.plus, $.minus, $.mul, $.div, $.cons),
+    plus: $ => prec.left(2, seq($._expr, "+", $._expr)),
+    minus: $ => prec.left(2, seq($._expr, "-", $._expr)),
     mul: $ => prec.left(3, seq($._expr, "*", $._expr)),
     div: $ => prec.left(3, seq($._expr, "/", $._expr)),
+    cons: $ => prec.right(1, seq($._expr, "::", $._expr)),
 
     // Tuples
     // (,)
@@ -109,6 +124,10 @@ module.exports = grammar({
     // Records
     record: $ => seq("[", choice(":", comma_sep($.record_pair)), "]"),
     record_pair: $ => seq($.ident, ":", $._expr),
+
+    // Record projection
+    record_projection: $ => seq($._aexpr, $._record_projection),
+    _record_projection: $ => token.immediate(/\.[_a-z0-9][A-Za-z0-9_]*/),
 
     // Let expressions
     let: $ => seq("let", comma_sep($.let_pair), block($._expr)),

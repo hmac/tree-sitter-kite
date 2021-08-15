@@ -1,0 +1,273 @@
+===
+Modules
+===
+
+module Data.List
+
+from kite import Kite.Prim {Bool, True, False}
+import Data.Semigroup { Semigroup { * } }
+import Data.Eq { Eq, eq }
+
+listAppend : [a] -> [a] -> [a] {
+  match {
+    [], ys -> ys,
+    x::xs, ys -> x :: listAppend xs ys,
+  }
+}
+
+semigroupList : Semigroup [a] {
+  Semigroup [append: listAppend]
+}
+
+monoidList : Monoid [a] {
+  Monoid [empty: [], semigroup: semigroupList]
+}
+
+mapList : (a -> b) -> [a] -> [b] {
+  match {
+    _, [] -> [],
+    f, x::xs -> f x :: mapList f xs,
+  }
+}
+
+---
+
+(module (module_ident)
+  (import_from (pkg_ident) (module_ident)
+    (import_list
+      (import_type (ctor_ident))
+      (import_type (ctor_ident))
+      (import_type (ctor_ident))))
+  (import (module_ident)
+    (import_list
+      (import_type (ctor_ident) (import_type_all))))
+  (import (module_ident)
+    (import_list
+      (import_type (ctor_ident))
+      (import_val (ident))))
+
+  (val_def (ident)
+    (func_type (list_type (var_type (ident)))
+      (func_type (list_type (var_type (ident)))
+        (list_type (var_type (ident)))))
+    (match
+      (match_branch
+        (pattern_group (list_pattern) (var_pattern (ident)))
+        (var (ident)))
+      (match_branch
+        (pattern_group
+          (cons_pattern (var_pattern (ident)) (var_pattern (ident)))
+          (var_pattern (ident)))
+        (cons
+          (var (ident))
+          (app (var (ident)) (var (ident)) (var (ident)))))))
+
+  (val_def (ident)
+    (app_type (ctor_type (ctor_ident)) (list_type (var_type (ident))))
+    (app (ctor (ctor_ident))
+      (record (record_pair (ident) (var (ident))))))
+
+  (val_def (ident)
+    (app_type (ctor_type (ctor_ident)) (list_type (var_type (ident))))
+    (app (ctor (ctor_ident))
+      (record
+        (record_pair (ident) (list))
+        (record_pair (ident) (var (ident))))))
+
+  (val_def (ident)
+    (func_type
+      (func_type (var_type (ident)) (var_type (ident)))
+      (func_type
+        (list_type (var_type (ident)))
+        (list_type (var_type (ident)))))
+    (match
+      (match_branch
+        (pattern_group
+          (wildcard_pattern)
+          (list_pattern))
+        (list))
+      (match_branch
+        (pattern_group
+          (var_pattern (ident))
+          (cons_pattern (var_pattern (ident)) (var_pattern (ident))))
+        (cons
+          (app (var (ident)) (var (ident)))
+          (app (var (ident)) (var (ident)) (var (ident)))))))
+)
+
+===
+apList
+===
+
+module Data.List
+
+apList : [a -> b] -> [a] -> [b] {
+  match {
+    [], xs -> [],
+    f::fs, xs -> listAppend (mapList f xs) (apList fs xs)
+  }
+}
+
+---
+
+(module (module_ident)
+  (val_def (ident)
+    (func_type
+      (list_type
+        (func_type
+          (var_type (ident))
+          (var_type (ident))))
+      (func_type
+        (list_type
+          (var_type (ident)))
+        (list_type
+          (var_type (ident)))))
+    (match
+      (match_branch
+        (pattern_group
+          (list_pattern)
+          (var_pattern (ident)))
+        (list))
+      (match_branch
+        (pattern_group
+          (cons_pattern
+            (var_pattern (ident))
+            (var_pattern (ident)))
+          (var_pattern (ident)))
+        (app
+          (var (ident))
+          (app
+            (var (ident))
+            (var (ident))
+            (var (ident)))
+          (app
+            (var (ident))
+            (var (ident))
+            (var (ident))))))))
+
+===
+traverse
+===
+
+module Foo
+
+traverse : Applicative f -> (a -> f b) -> [a] -> f [b] {
+  match {
+    appl, f, [] -> pure appl [],
+    appl, f, x::xs -> liftA2 appl match { y, ys -> y::ys } (f x) (traverse appl f xs)
+  }
+}
+
+---
+
+(module (module_ident)
+  (val_def (ident)
+    (func_type
+      (app_type
+        (ctor_type (ctor_ident))
+        (var_type (ident)))
+      (func_type
+        (func_type
+          (var_type (ident))
+          (app_type
+            (var_type (ident))
+            (var_type (ident))))
+        (func_type
+          (list_type (var_type (ident)))
+          (app_type
+            (var_type (ident))
+            (list_type (var_type (ident)))))))
+    (match
+      (match_branch
+        (pattern_group
+          (var_pattern (ident))
+          (var_pattern (ident))
+          (list_pattern))
+        (app
+          (var (ident))
+          (var (ident))
+          (list)))
+      (match_branch
+        (pattern_group
+          (var_pattern (ident))
+          (var_pattern (ident))
+          (cons_pattern
+            (var_pattern (ident))
+            (var_pattern (ident))))
+        (app
+          (var (ident))
+          (var (ident))
+          (match
+            (match_branch
+              (pattern_group
+                (var_pattern (ident))
+                (var_pattern (ident)))
+              (cons
+                (var (ident))
+                (var (ident)))))
+          (app
+            (var (ident))
+            (var (ident)))
+          (app
+            (var (ident))
+            (var (ident))
+            (var (ident))
+            (var (ident))))))))
+
+===
+Data.Monoid
+===
+
+module Data.Monoid
+
+import Kite.List { foldr }
+import Data.Semigroup { Semigroup, append }
+
+type Monoid a {
+  Monoid [empty: a, semigroup: Semigroup a]
+}
+
+concat : Monoid a -> [a] -> a {
+  match {
+    Monoid d -> foldr (append d.semigroup) d.empty
+  }
+}
+
+---
+
+(module (module_ident)
+  (import (module_ident) (import_list (import_val (ident))))
+  (import (module_ident)
+    (import_list
+      (import_type (ctor_ident))
+      (import_val (ident))))
+
+  (type_def
+    (ctor_ident)
+    (type_params (ident))
+    (ctor_def
+      (ctor_ident)
+      (record_type
+        (record_type_pair (ident) (var_type (ident)))
+        (record_type_pair (ident) (app_type (ctor_type (ctor_ident)) (var_type (ident)))))))
+
+  (val_def
+    (ident)
+    (func_type
+      (app_type
+        (ctor_type (ctor_ident))
+        (var_type (ident)))
+      (func_type
+        (list_type (var_type (ident)))
+        (var_type (ident))))
+    (match
+      (match_branch
+        (pattern_group (ctor_pattern (ctor (ctor_ident)) (var_pattern (ident))))
+        (app
+          (var (ident))
+          (app
+            (var (ident))
+            (record_projection (var (ident))))
+          (record_projection (var (ident)))))))
+              
+)
