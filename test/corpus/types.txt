@@ -1,0 +1,111 @@
+==========
+Type applications
+==========
+
+module Foo
+
+foo1 : A {  MkA }
+
+foo2 : A B {  MkA }
+
+foo3 : A B C {  MkA }
+
+---
+
+(module (module_ident)
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (ctor (ctor_ident)))
+  (val_def 
+    (ident)
+    (app_type (ctor_type (ctor_ident)) (ctor_type (ctor_ident)))
+    (ctor (ctor_ident)))
+  (val_def 
+    (ident)
+    (app_type
+      (ctor_type (ctor_ident))
+      (ctor_type (ctor_ident))
+      (ctor_type (ctor_ident)))
+    (ctor (ctor_ident))))
+
+==========
+Function types
+==========
+
+module Foo
+
+foo1 : A -> B {
+  MkA
+}
+
+foo2 : A -> B -> C {
+  MkA
+}
+
+foo3 : A B -> C {
+  MkA
+}
+
+foo4 : A -> B C {
+  MkA
+}
+
+---
+
+(module (module_ident)
+  (val_def 
+    (ident)
+    (func_type
+      (ctor_type (ctor_ident))
+      (ctor_type (ctor_ident)))
+    (ctor (ctor_ident)))
+  (val_def 
+    (ident)
+    (func_type
+      (ctor_type (ctor_ident))
+      (func_type
+        (ctor_type (ctor_ident))
+        (ctor_type (ctor_ident))))
+    (ctor (ctor_ident)))
+  (val_def 
+    (ident)
+    (func_type
+      (app_type (ctor_type (ctor_ident)) (ctor_type (ctor_ident)))
+      (ctor_type (ctor_ident)))
+    (ctor (ctor_ident)))
+  (val_def 
+    (ident)
+    (func_type
+      (ctor_type (ctor_ident))
+      (app_type (ctor_type (ctor_ident)) (ctor_type (ctor_ident))))
+    (ctor (ctor_ident))))
+
+==========
+List types
+==========
+
+module Foo
+
+foo1 : [A] {
+  MkA
+}
+
+foo2 : A -> [B] {
+  MkA
+}
+
+---
+
+(module (module_ident)
+  (val_def 
+    (ident)
+    (list_type (ctor_type (ctor_ident)))
+    (ctor (ctor_ident)))
+  (val_def 
+    (ident)
+    (func_type
+      (ctor_type (ctor_ident))
+      (list_type (ctor_type (ctor_ident))))
+    (ctor (ctor_ident))))
+
