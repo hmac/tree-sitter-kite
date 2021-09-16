@@ -1,0 +1,47 @@
+===
+Patterns
+===
+
+module Foo
+
+f : A {
+  match {
+    x,
+    x::z,
+    _,
+    [],
+    [1],
+    [1,2],
+    [1,2,],
+    Foo x,
+    (x, y),
+    (x, y, z),
+    (x,)
+      -> x,
+  }
+}
+
+---
+
+(module (module_ident)
+  (val_def
+    (ident)
+    (ctor_type (ctor_ident))
+    (match
+      (match_branch
+        (pattern_group
+          (var_pattern (ident))
+          (cons_pattern (var_pattern (ident)) (var_pattern (ident)))
+          (wildcard_pattern)
+          (list_pattern)
+          (list_pattern (int))
+          (list_pattern (int) (int))
+          (list_pattern (int) (int))
+          (ctor_pattern (ctor (ctor_ident)) (var_pattern (ident)))
+          (tuple_pattern (var_pattern (ident)) (var_pattern (ident)))
+          (tuple_pattern (var_pattern (ident)) (var_pattern (ident)) (var_pattern (ident)))
+          (tuple_pattern (var_pattern (ident)))
+        )
+        (var (ident))))
+  ))
+

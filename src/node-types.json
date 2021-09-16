@@ -198,7 +198,15 @@
           "named": true
         },
         {
+          "type": "int",
+          "named": true
+        },
+        {
           "type": "list_pattern",
+          "named": true
+        },
+        {
+          "type": "tuple_pattern",
           "named": true
         },
         {
@@ -292,7 +300,15 @@
           "named": true
         },
         {
+          "type": "int",
+          "named": true
+        },
+        {
           "type": "list_pattern",
+          "named": true
+        },
+        {
+          "type": "tuple_pattern",
           "named": true
         },
         {
@@ -801,7 +817,15 @@
           "named": true
         },
         {
+          "type": "int",
+          "named": true
+        },
+        {
           "type": "list_pattern",
+          "named": true
+        },
+        {
+          "type": "tuple_pattern",
           "named": true
         },
         {
@@ -1139,7 +1163,15 @@
           "named": true
         },
         {
+          "type": "int",
+          "named": true
+        },
+        {
           "type": "list_pattern",
+          "named": true
+        },
+        {
+          "type": "tuple_pattern",
           "named": true
         },
         {
@@ -1505,6 +1537,45 @@
         },
         {
           "type": "var",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tuple_pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cons_pattern",
+          "named": true
+        },
+        {
+          "type": "ctor_pattern",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "list_pattern",
+          "named": true
+        },
+        {
+          "type": "tuple_pattern",
+          "named": true
+        },
+        {
+          "type": "var_pattern",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]

@@ -150,11 +150,20 @@ module.exports = grammar({
     pattern_group: $ => seq(repeat(seq($._pattern, ",")), $._pattern),
 
     // Patterns
-    _pattern: $ => choice($.ctor_pattern, $.wildcard_pattern, $.list_pattern, $.cons_pattern, $.var_pattern),
+    _pattern: $ => choice(
+      $.ctor_pattern,
+      $.wildcard_pattern,
+      $.list_pattern,
+      $.cons_pattern,
+      $.var_pattern,
+      $.tuple_pattern,
+      $.int,
+    ),
     ctor_pattern: $ => prec.left(2, seq($.ctor, repeat($._pattern))),
     wildcard_pattern: $ => "_",
-    list_pattern: $ => seq("[", repeat($._pattern), "]"),
+    list_pattern: $ => seq("[", optional(comma_sep($._pattern)), "]"),
     cons_pattern: $ => prec.right(1, seq($._pattern, "::", $._pattern)),
     var_pattern: $ => $.ident,
+    tuple_pattern: $ => seq("(", comma_sep($._pattern), ")"),
   }
 });
