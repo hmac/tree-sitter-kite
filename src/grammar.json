@@ -326,6 +326,10 @@
         {
           "type": "SYMBOL",
           "name": "type_def"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_alias"
         }
       ]
     },
@@ -468,6 +472,48 @@
         "type": "SYMBOL",
         "name": "ident"
       }
+    },
+    "type_alias": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "type alias"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ctor_ident"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "type_params"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "{"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_type"
+            },
+            {
+              "type": "STRING",
+              "value": "}"
+            }
+          ]
+        }
+      ]
     },
     "_type": {
       "type": "CHOICE",

@@ -12,6 +12,9 @@ nth : Nat -> [a] -> Maybe a {
   }
 }
 
+type alias Foo { Bar }
+type alias FallibleFn a b { a -> Maybe b }
+
 ---
 
 (module (module_ident)
@@ -32,4 +35,13 @@ nth : Nat -> [a] -> Maybe a {
         (match_branch (pattern_group
                         (ctor_pattern (ctor (ctor_ident)) (var_pattern (ident)))
                         (cons_pattern (wildcard_pattern) (var_pattern (ident))))
-          (app (var (ident)) (var (ident)) (var (ident)))))))
+          (app (var (ident)) (var (ident)) (var (ident))))))
+  (type_alias
+    (ctor_ident)
+    (ctor_type (ctor_ident)))
+  (type_alias
+    (ctor_ident)
+    (type_params (ident) (ident))
+    (func_type
+      (var_type (ident))
+      (app_type (ctor_type (ctor_ident)) (var_type (ident))))))

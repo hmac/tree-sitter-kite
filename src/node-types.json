@@ -1032,6 +1032,10 @@
           "named": true
         },
         {
+          "type": "type_alias",
+          "named": true
+        },
+        {
           "type": "type_def",
           "named": true
         },
@@ -1507,6 +1511,49 @@
     }
   },
   {
+    "type": "type_alias",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "app_type",
+          "named": true
+        },
+        {
+          "type": "ctor_ident",
+          "named": true
+        },
+        {
+          "type": "ctor_type",
+          "named": true
+        },
+        {
+          "type": "func_type",
+          "named": true
+        },
+        {
+          "type": "list_type",
+          "named": true
+        },
+        {
+          "type": "record_type",
+          "named": true
+        },
+        {
+          "type": "type_params",
+          "named": true
+        },
+        {
+          "type": "var_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "type_def",
     "named": true,
     "fields": {},
@@ -1782,6 +1829,10 @@
   },
   {
     "type": "type",
+    "named": false
+  },
+  {
+    "type": "type alias",
     "named": false
   },
   {
