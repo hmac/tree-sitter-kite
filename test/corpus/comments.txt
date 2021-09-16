@@ -1,0 +1,25 @@
+===
+Comments
+===
+
+module Foo
+
+# A free floating comment
+
+# A comment on a definition
+foo : A {
+  # A comment inside a definition
+  [1] # A comment on the end of a line
+}
+
+---
+
+(module (module_ident)
+  (comment)
+  (comment)
+  (val_def 
+    (ident)
+    (ctor_type (ctor_ident))
+    (comment)
+    (list (int))
+    (comment)))

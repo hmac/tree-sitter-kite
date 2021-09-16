@@ -25,8 +25,16 @@ const block = (...rule) => seq("{", ...rule, "}");
 
 module.exports = grammar({
   name: "kite",
+  extras: $ => [
+    normalize(/\s/), // whitespace
+    $.comment
+  ],
   rules: {
     module: $ => seq("module", $.module_ident, repeat($._import), repeat($._def)),
+
+    // Comments
+    // # foo
+    comment: $ => seq("#", /.*/),
 
     // Names
     // All names must start with a letter and contain only alphanumerics and '_'.
