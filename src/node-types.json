@@ -667,6 +667,10 @@
           "named": true
         },
         {
+          "type": "app_type",
+          "named": true
+        },
+        {
           "type": "cons",
           "named": true
         },
@@ -675,7 +679,15 @@
           "named": true
         },
         {
+          "type": "ctor_type",
+          "named": true
+        },
+        {
           "type": "div",
+          "named": true
+        },
+        {
+          "type": "func_type",
           "named": true
         },
         {
@@ -692,6 +704,10 @@
         },
         {
           "type": "list",
+          "named": true
+        },
+        {
+          "type": "list_type",
           "named": true
         },
         {
@@ -719,11 +735,19 @@
           "named": true
         },
         {
+          "type": "record_type",
+          "named": true
+        },
+        {
           "type": "tuple",
           "named": true
         },
         {
           "type": "var",
+          "named": true
+        },
+        {
+          "type": "var_type",
           "named": true
         }
       ]

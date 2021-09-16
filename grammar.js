@@ -142,7 +142,7 @@ module.exports = grammar({
 
     // Let expressions
     let: $ => seq("let", comma_sep($.let_pair), block($._expr)),
-    let_pair: $ => seq($.ident, "=", $._expr),
+    let_pair: $ => seq($.ident, optional(seq(":", $._type)), "=", $._expr),
 
     // Match expressions
     match: $ => seq("match", block(comma_sep($.match_branch))),

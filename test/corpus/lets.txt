@@ -15,6 +15,8 @@ foo : A {
         y = 2, { x },
     let x = 1,
         y = 2, { let z = x { z } },
+    let x : Int = 1,
+        y = 2, { x },
   ]
 }
 
@@ -40,4 +42,8 @@ foo : A {
         (let_pair (ident) (int))
         (let
           (let_pair (ident) (var (ident)))
-          (var (ident)))))))
+          (var (ident))))
+      (let
+        (let_pair (ident) (ctor_type (ctor_ident)) (int))
+        (let_pair (ident) (int))
+        (var (ident))))))
