@@ -473,7 +473,7 @@
           "named": true
         },
         {
-          "type": "import_open",
+          "type": "import_qualified",
           "named": true
         },
         {
@@ -515,7 +515,7 @@
           "named": true
         },
         {
-          "type": "import_open",
+          "type": "import_qualified",
           "named": true
         },
         {
@@ -1943,7 +1943,7 @@
     "named": false
   },
   {
-    "type": "import_open",
+    "type": "import_qualified",
     "named": true
   },
   {

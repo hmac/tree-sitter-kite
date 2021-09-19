@@ -48,6 +48,10 @@ module.exports = grammar({
     // A series of upper idents separated by dots
     _qual_upper_ident: $ => /[A-Z][A-Za-z0-9_]*(\.[A-Z][A-Za-z0-9_]*)*/,
 
+    // Keywords
+    // https://tree-sitter.github.io/tree-sitter/creating-parsers#keyword-extraction
+    word: $ => $._lower_ident,
+
     ident: $ => $._lower_ident,
     ctor_ident: $ => $._upper_ident,
     module_ident: $ => $._qual_upper_ident,
@@ -57,12 +61,12 @@ module.exports = grammar({
     pkg_ident: $ => /[a-z][a-z0-9-]*/,
 
     // Imports
-    // [from <pkg>] import [open] <module_ident> [{<ctor_ident>[{* | <ctor_ident>, ...}] | <ident>, ...}] [as <module_ident>]
+    // [from <pkg>] import [qualified] <module_ident> [{<ctor_ident>[{* | <ctor_ident>, ...}] | <ident>, ...}] [as <module_ident>]
     _import: $ => choice($.import_from, $.import),
     import_from: $ => seq("from", $.pkg_ident, $._import_rest),
     import: $ => $._import_rest,
-    _import_rest: $ => seq("import", optional($.import_open), $.module_ident, optional($.import_list), optional($.import_alias)),
-    import_open: $ => "open",
+    _import_rest: $ => seq("import", optional($.import_qualified), $.module_ident, optional($.import_list), optional($.import_alias)),
+    import_qualified: $ => "qualified",
     import_list: $ => block(comma_sep($._import_list_item)),
     _import_list_item: $ => choice($.import_type, $.import_val),
     import_type: $ => seq($.ctor_ident, optional(block(choice($.import_type_all, comma_sep($.ctor_ident))))),

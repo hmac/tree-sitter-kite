@@ -53,6 +53,10 @@
       "type": "PATTERN",
       "value": "[A-Z][A-Za-z0-9_]*(\\.[A-Z][A-Za-z0-9_]*)*"
     },
+    "word": {
+      "type": "SYMBOL",
+      "name": "_lower_ident"
+    },
     "ident": {
       "type": "SYMBOL",
       "name": "_lower_ident"
@@ -115,7 +119,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "import_open"
+              "name": "import_qualified"
             },
             {
               "type": "BLANK"
@@ -152,9 +156,9 @@
         }
       ]
     },
-    "import_open": {
+    "import_qualified": {
       "type": "STRING",
-      "value": "open"
+      "value": "qualified"
     },
     "import_list": {
       "type": "SEQ",
