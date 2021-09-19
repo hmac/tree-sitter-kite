@@ -14,10 +14,12 @@ f : A {
     [1,2],
     [1,2,],
     Foo x,
+    (,),
     (x, y),
     (x, y, z),
     (x,)
       -> x,
+    w :: x -> y :: z a
   }
 }
 
@@ -38,10 +40,20 @@ f : A {
           (list_pattern (int) (int))
           (list_pattern (int) (int))
           (ctor_pattern (ctor (ctor_ident)) (var_pattern (ident)))
+          (unit_pattern)
           (tuple_pattern (var_pattern (ident)) (var_pattern (ident)))
           (tuple_pattern (var_pattern (ident)) (var_pattern (ident)) (var_pattern (ident)))
           (tuple_pattern (var_pattern (ident)))
         )
-        (var (ident))))
-  ))
+        (var (ident)))
+      (match_branch
+        (pattern_group
+          (cons_pattern
+            (var_pattern (ident))
+            (var_pattern (ident))))
+        (cons
+          (var (ident))
+          (app
+            (var (ident))
+            (var (ident))))))))
 

@@ -210,6 +210,10 @@
           "named": true
         },
         {
+          "type": "unit_pattern",
+          "named": true
+        },
+        {
           "type": "var_pattern",
           "named": true
         },
@@ -309,6 +313,10 @@
         },
         {
           "type": "tuple_pattern",
+          "named": true
+        },
+        {
+          "type": "unit_pattern",
           "named": true
         },
         {
@@ -853,6 +861,10 @@
           "named": true
         },
         {
+          "type": "unit_pattern",
+          "named": true
+        },
+        {
           "type": "var_pattern",
           "named": true
         },
@@ -1196,6 +1208,10 @@
         },
         {
           "type": "tuple_pattern",
+          "named": true
+        },
+        {
+          "type": "unit_pattern",
           "named": true
         },
         {
@@ -1595,6 +1611,10 @@
           "named": true
         },
         {
+          "type": "unit_pattern",
+          "named": true
+        },
+        {
           "type": "var_pattern",
           "named": true
         },
@@ -1685,6 +1705,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "unit_pattern",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "val_def",
@@ -1781,6 +1806,10 @@
         {
           "type": "var_type",
           "named": true
+        },
+        {
+          "type": "where",
+          "named": true
         }
       ]
     }
@@ -1825,6 +1854,21 @@
       "types": [
         {
           "type": "ident",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "where",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "val_def",
           "named": true
         }
       ]
@@ -1928,6 +1972,10 @@
   },
   {
     "type": "type alias",
+    "named": false
+  },
+  {
+    "type": "where",
     "named": false
   },
   {

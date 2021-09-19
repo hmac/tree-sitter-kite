@@ -45,3 +45,65 @@ type alias FallibleFn a b { a -> Maybe b }
     (func_type
       (var_type (ident))
       (app_type (ctor_type (ctor_ident)) (var_type (ident))))))
+
+===
+init
+===
+
+module Init
+
+# Return all the elements of a list except the last one.
+# Returns Nothing if the list is empty.
+init : [a] -> Maybe [a] {
+  match {
+    [] -> Nothing,
+    xs -> Just (go xs)
+  }
+}
+where {
+  go : [a] -> [a] {
+    match {
+      [x]     -> [],
+      x :: xs -> x :: go xs
+    }
+  }
+ }
+
+---
+
+(module (module_ident)
+  (comment)
+  (comment)
+  (val_def 
+    (ident)
+    (func_type (list_type (var_type (ident)))
+      (app_type
+        (ctor_type (ctor_ident))
+        (list_type (var_type (ident)))))
+    (match
+        (match_branch
+          (pattern_group (list_pattern))
+          (ctor (ctor_ident)))
+        (match_branch
+          (pattern_group (var_pattern (ident)))
+          (app
+            (ctor (ctor_ident))
+            (app (var (ident)) (var (ident))))))
+    (where
+      (val_def 
+        (ident)
+        (func_type
+          (list_type (var_type (ident)))
+          (list_type (var_type (ident))))
+        (match
+            (match_branch
+              (pattern_group (list_pattern (var_pattern (ident))))
+              (list))
+            (match_branch
+              (pattern_group
+                (cons_pattern
+                  (var_pattern (ident))
+                  (var_pattern (ident))))
+              (cons
+                (var (ident))
+                (app (var (ident)) (var (ident))))))))))

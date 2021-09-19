@@ -71,10 +71,11 @@ module.exports = grammar({
     import_alias: $ => seq("as", $.module_ident),
 
     _def: $ => choice($.val_def, $.type_def, $.type_alias),
-    val_def: $ => seq($.ident, ":", $._type, block($._expr)),
+    val_def: $ => seq($.ident, ":", $._type, block($._expr), optional($.where)),
     type_def: $ => seq("type", $.ctor_ident, optional($.type_params), block(optional(comma_sep($.ctor_def)))),
     ctor_def: $ => seq($.ctor_ident, repeat($._atype)),
     type_params: $ => repeat1($.ident),
+    where: $ => seq("where", block(repeat($.val_def))),
 
     // Type aliases
     type_alias: $ => seq("type alias", $.ctor_ident, optional($.type_params), block($._type)),
@@ -156,6 +157,7 @@ module.exports = grammar({
       $.list_pattern,
       $.cons_pattern,
       $.var_pattern,
+      $.unit_pattern,
       $.tuple_pattern,
       $.int,
     ),
@@ -164,6 +166,7 @@ module.exports = grammar({
     list_pattern: $ => seq("[", optional(comma_sep($._pattern)), "]"),
     cons_pattern: $ => prec.right(1, seq($._pattern, "::", $._pattern)),
     var_pattern: $ => $.ident,
+    unit_pattern: $ => seq("(", ",", ")"),
     tuple_pattern: $ => seq("(", comma_sep($._pattern), ")"),
   }
 });
