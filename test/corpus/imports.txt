@@ -5,7 +5,7 @@ Imports
 module Foo
 
 import Bar1
-import open Bar2
+import qualified Bar2
 import Bar3 {
   a,
   b,
@@ -26,7 +26,7 @@ from baz import Baz {
 
 (module (module_ident)
   (import (module_ident))
-  (import (import_open) (module_ident))
+  (import (import_qualified) (module_ident))
   (import (module_ident)
     (import_list
       (import_val (ident))
