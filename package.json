@@ -15,5 +15,11 @@
   },
   "scripts": {
     "test": "tree-sitter test"
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.kite",
+      "file-types": ["kite"]
+    }
+  ]
 }
