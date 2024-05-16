@@ -7,7 +7,7 @@
 "where" @keyword
 
 ; Types (and modules)
-(module (module_ident) @constructor)
+(module_ident) @constructor
 (ctor_type) @constructor
 (var_type) @type
 (import_type (ctor_ident) @constructor)
@@ -23,3 +23,6 @@
 (var) @variable
 (type_params (ident) @variable)
 (var_type (ident) @variable)
+
+; Literals
+(int) @number
